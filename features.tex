@@ -1,9 +1,121 @@
-\begin{frame}
+\section{Features}
+
+\frame{\sectionpage}
+
+\begin{frame}[fragile]
+  \frametitle{Functional}
+
+  Programs are written like mathematical functions:
+
+  \begin{semiverbatim}
+f :: Int -> Int
+f x = x + 1
+  \end{semiverbatim}
+
+  Datatypes are defined as alternatives:
+
+  \begin{semiverbatim}
+data IntList = Empty | Cons Int IntList
+  \end{semiverbatim}
+\end{frame}  
+
+\begin{frame}[fragile]
+  \frametitle{Functional}
+
+  \begin{semiverbatim}
+fib :: Int -> Int
+fib n = loop 0 1 n
+  where loop a b 0 = a
+        loop a b i = loop b (a + b) (i - 1)
+  \end{semiverbatim}
+
+  versus
+  
+  \begin{semiverbatim}
+int fib (int n) \{
+    int a = 0, b = 1;
+    for (int i = 0; i < n; ++i) \{
+        int tmp = a;
+        a = a + b;
+        b = tmp;
+    \}
+    return a;
+\}
+  \end{semiverbatim}
+\end{frame}
+
+\begin{frame}[fragile]
   \frametitle{Lazy}
 
   Values aren't evaluated until needed
 
-  Allows for
-  %% \begin{itemize}
-  %% \item Infinite Lists: \texttt{
+  Allows for infinite datastructues:
+
+  \begin{semiverbatim}
+takeWhile (\\x -> x < 100)
+          (map (\\x -> x*x) [1..])
+  \end{semiverbatim}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Type System}
+
+  \begin{itemize}
+  \item Type Inference
+  \item Parametric Polymorphism
+  \item Typeclasses
+  \item ...And More!
+  \end{itemize}
+\end{frame} 
+
+\begin{frame}[fragile]
+  \frametitle{Type Inference}
+
+  Statically typed, but don't need to write most types
+
+  \begin{semiverbatim}
+length [] = 0
+length (x : xs) = 1 + length xs
+  \end{semiverbatim}
+
+  Type is inferred to be a list
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Parametric Polymorphism}
+
+  Functions and data can work across many types:
+
+  \begin{semiverbatim}
+data List a = Nil | Cons a (List a)
+
+append :: List a -> List a -> List a
+  \end{semiverbatim}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Typeclasses}
+
+  Like interfaces, but better type-safety
+
+  \begin{semiverbatim}
+(+) :: Num a => a -> a -> a
+  \end{semiverbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Typeclasses}
+  \begin{semiverbatim}
+-- "Monoid" is fancy math speak for "Appendable"
+concatTree :: Monoid a => Tree a -> a
+concatTree (Leaf x) = x
+concatTree (Branch left x right) =
+  mconcat (concatTree left)
+          (mconcat x (concatTree right))
+  \end{semiverbatim}
+\end{frame}
+
+%% \begin{frame}
+%%   \frametitle{And More}
+
+  
