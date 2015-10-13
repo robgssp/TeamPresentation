@@ -124,3 +124,21 @@ concatTree (Branch left x right) =
   testbed
 \end{frame}
   
+\begin{frame}
+  \frametitle{Pure}
+
+  Functions are \emph{pure}: no side effects
+
+  How do you do IO?
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Pure IO}
+
+  \begin{semiverbatim}
+input :: [Char]
+
+output :: [Char]
+output = "Doubled: " ++ (show (2 * (read input)))
+  \end{semiverbatim}
+\end{frame}
